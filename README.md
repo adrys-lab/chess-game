@@ -30,6 +30,6 @@ Explanation of solution:
 -----------------------
 
 - I dedicated a bit more of time than needed maybe
-- Some advamced chess-functionalities are not present (towe by king exchange movement).
+- Some advanced chess-functionalities are not present (tower by king exchange movement or forbid move another piece which is not king if it's threatened).
 - with more time i would like to fully test more controllers, but i didn't want to expend more time on it.
 - with more time i would like to clean-up a bit the formulas used for the movements. 

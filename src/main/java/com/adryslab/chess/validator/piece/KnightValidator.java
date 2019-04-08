@@ -8,7 +8,7 @@ import com.adryslab.chess.resources.ErrorMessages;
 import com.adryslab.chess.resources.Messages;
 
 @Singleton
-public class KnightValidator extends AbstractPieceValidator implements TriValidator<Cell, Cell, Cell[][], String> {
+public class KnightValidator extends AbstractPieceValidator {
 
     private static TriValidator<Cell, Cell, Cell[][], String> instance;
 

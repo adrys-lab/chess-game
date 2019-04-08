@@ -11,12 +11,11 @@ import java.util.function.Function;
 
 /**
  *
- * All classes inheriting this abstract, validate all piece-related movements,
- * until reach destination cell.
+ * All classes inheriting this abstract, validate all piece-related movements:
  *
- * validate if the start cell and end cell, draw a valid movement for the given piece.
+ * Validations can be related to piece correctness movement, and validation to king Check all around the board.
  */
-abstract class AbstractPieceValidator {
+abstract class AbstractPieceValidator implements TriValidator<Cell, Cell, Cell[][], String> {
 
     Result<String> commonValidate(final Cell originCell, final Cell destinationCell) {
 
