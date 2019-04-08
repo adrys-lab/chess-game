@@ -1,4 +1,4 @@
-package com.adryslab.chess.validator.context;
+package com.adryslab.chess.validator.piece;
 
 import com.adryslab.chess.controller.BoardMatrix;
 import com.adryslab.chess.model.Position;
@@ -11,7 +11,7 @@ import com.adryslab.chess.model.piece.type.PieceType;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DiagonalKillKingValidatorTest {
+public class DiagonalValidatorTest {
 
     @Test
     public void checkDiagonalValid() {
@@ -20,7 +20,7 @@ public class DiagonalKillKingValidatorTest {
         Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
         board[4][4] = Cell.of(Position.of(4, 4), new King(Colour.WHITE));
 
-        PieceKillKingValidatorProvider.getPieceMoveValidators(PieceType.BISHOP)
+        PieceValidatorProvider.getPieceMoveValidators(PieceType.BISHOP)
                 .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
 
         board[4][4] = Cell.of(Position.of(4, 4), new EmptySlot());
@@ -33,7 +33,7 @@ public class DiagonalKillKingValidatorTest {
         Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
         board[4][4] = Cell.of(Position.of(4, 4), new King(Colour.BLACK));
 
-        PieceKillKingValidatorProvider.getPieceMoveValidators(PieceType.BISHOP)
+        PieceValidatorProvider.getPieceMoveValidators(PieceType.BISHOP)
                 .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isFailure()));
 
         board[4][4] = Cell.of(Position.of(4, 4), new EmptySlot());
@@ -46,11 +46,9 @@ public class DiagonalKillKingValidatorTest {
         Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
         board[4][3] = Cell.of(Position.of(4, 4), new King(Colour.WHITE));
 
-        PieceKillKingValidatorProvider.getPieceMoveValidators(PieceType.BISHOP)
+        PieceValidatorProvider.getPieceMoveValidators(PieceType.BISHOP)
                 .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isFailure()));
 
         board[4][3] = Cell.of(Position.of(4, 4), new EmptySlot());
     }
-
-
 }

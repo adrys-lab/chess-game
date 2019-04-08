@@ -4,7 +4,9 @@ import com.adryslab.chess.controller.BoardMatrix;
 import com.adryslab.chess.model.Position;
 import com.adryslab.chess.model.cell.Cell;
 import com.adryslab.chess.model.piece.Colour;
-import com.adryslab.chess.model.piece.type.*;
+import com.adryslab.chess.model.piece.type.Bishop;
+import com.adryslab.chess.model.piece.type.EmptySlot;
+import com.adryslab.chess.model.piece.type.PieceType;
 import org.junit.Assert;
 import org.junit.Test;
 

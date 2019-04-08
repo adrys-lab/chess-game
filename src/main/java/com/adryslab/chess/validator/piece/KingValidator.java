@@ -5,6 +5,7 @@ import com.adryslab.chess.model.annotation.Singleton;
 import com.adryslab.chess.model.cell.Cell;
 import com.adryslab.chess.model.piece.Colour;
 import com.adryslab.chess.resources.ErrorMessages;
+import com.adryslab.chess.resources.Messages;
 
 @Singleton
 public class KingValidator extends AbstractPieceValidator implements TriValidator<Cell, Cell, Cell[][], String> {
@@ -30,6 +31,14 @@ public class KingValidator extends AbstractPieceValidator implements TriValidato
         return instance;
     }
 
+    /**
+     * Method used to validate if the king movement, from origin to destination, is correct or not.
+     *
+     * @param originCell starting cell
+     * @param destinationCell destination cell
+     * @param board board representation
+     * @return valid of failure and message
+     */
     @Override
     public Result<String> validate(final Cell originCell, final Cell destinationCell, final Cell[][] board) {
 
@@ -56,6 +65,32 @@ public class KingValidator extends AbstractPieceValidator implements TriValidato
             return Result.valid();
         } else {
             return Result.failure(ErrorMessages.KING_INCORRECT_MOVE);
+        }
+    }
+
+    /**
+     * Method used to check if the given piece with its respective allowed movements, can find a king to kill --> used to CHECK strategy
+     *
+     * @param cell current piece cell
+     * @param board board representation
+     * @return valid of failure and message
+     */
+    @Override
+    public Result<String> validate(Cell cell, final Cell[][] board) {
+        final int yStart = cell.getPosition().getY();
+        final int xStart = cell.getPosition().getX();
+
+        final Colour pieceColour = cell.getSlot().getColour();
+
+        if ((areInRange(board, yStart + 1, xStart) && isKingAgainst(board[yStart + 1][xStart], pieceColour))
+                || (areInRange(board, yStart - 1, xStart) && isKingAgainst(board[yStart - 1][xStart], pieceColour))
+                || (areInRange(board, yStart, xStart + 1) && isKingAgainst(board[yStart][xStart + 1], pieceColour))
+                || (areInRange(board, yStart, xStart - 1) && isKingAgainst(board[yStart][xStart - 1], pieceColour))
+                || (areInRange(board, yStart + 1, xStart + 1) && isKingAgainst(board[yStart + 1][xStart + 1], pieceColour))
+                || (areInRange(board, yStart - 1, xStart - 1) && isKingAgainst(board[yStart - 1][xStart - 1], pieceColour))) {
+            return Result.valid(String.format(Messages.CHECK, board[yStart][xStart].getSlot().getCellContent().getName()));
+        } else {
+            return Result.failure();
         }
     }
 }

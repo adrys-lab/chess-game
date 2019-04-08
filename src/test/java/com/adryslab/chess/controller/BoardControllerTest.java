@@ -4,11 +4,12 @@ import com.adryslab.chess.model.Position;
 import com.adryslab.chess.model.Result;
 import com.adryslab.chess.model.cell.Cell;
 import com.adryslab.chess.model.piece.Colour;
-import com.adryslab.chess.model.piece.type.*;
+import com.adryslab.chess.model.piece.type.Bishop;
+import com.adryslab.chess.model.piece.type.EmptySlot;
+import com.adryslab.chess.model.piece.type.King;
 import com.adryslab.chess.model.state.GameState;
 import com.adryslab.chess.resources.ErrorMessages;
 import com.adryslab.chess.resources.Messages;
-import com.adryslab.chess.validator.context.PieceKillKingValidatorProvider;
 import org.junit.Assert;
 import org.junit.Test;
 

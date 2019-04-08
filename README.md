@@ -1,7 +1,7 @@
 Dependencies:
 -----------------------
-Maven 3
-Java 8
+- Maven 3
+- Java 8
 
 
 Description:
@@ -15,8 +15,8 @@ Description:
 How to package & run:
 -----------------------
 
-``mvn package``
-- java -jar <home-folder>/target/chess-game-1.0.0-SNAPSHOT.jar
+- ``mvn package``
+- ``java -jar <home-folder>/target/chess-game-1.0.0-SNAPSHOT.jar``
 
 
 How to test:

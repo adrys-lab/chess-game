@@ -8,7 +8,6 @@ import com.adryslab.chess.model.piece.type.EmptySlot;
 import com.adryslab.chess.model.piece.type.PieceType;
 import com.adryslab.chess.model.state.GameState;
 import com.adryslab.chess.resources.Messages;
-import com.adryslab.chess.validator.context.PieceKillKingValidatorProvider;
 import com.adryslab.chess.validator.piece.PieceValidatorProvider;
 import org.apache.commons.lang3.StringUtils;
 
@@ -141,7 +140,7 @@ public class BoardController {
         return Arrays.stream(getBoard(), 0, 8)
                 .map(cell -> Arrays.stream(cell, 0, 8)
                         .filter(cellSlot -> !cellSlot.getSlot().getCellContent().isEmpty())
-                        .map(cellSlot -> PieceKillKingValidatorProvider.getPieceMoveValidators(PieceTypeMapper.map(cellSlot.getSlot().getCellContent()))
+                        .map(cellSlot -> PieceValidatorProvider.getPieceMoveValidators(PieceTypeMapper.map(cellSlot.getSlot().getCellContent()))
                                 .stream()
                                 .map(validator -> validator.validate(cellSlot, getBoard()))
                                 .filter(Result::isValid)
