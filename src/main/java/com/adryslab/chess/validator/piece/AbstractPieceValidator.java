@@ -16,7 +16,7 @@ import java.util.function.Function;
  *
  * Validations can be related to piece correctness movement, and validation to king Check all around the board.
  */
-abstract class AbstractPieceValidator implements TriValidator<Cell, Cell, Cell[][], String>, BiValidator<Cell, Cell[][], String> {
+public abstract class AbstractPieceValidator implements TriValidator<Cell, Cell, Cell[][], String>, BiValidator<Cell, Cell[][], String> {
 
     Result<String> commonValidate(final Cell originCell, final Cell destinationCell) {
 

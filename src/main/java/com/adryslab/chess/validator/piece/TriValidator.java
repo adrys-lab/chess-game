@@ -9,6 +9,7 @@ import com.adryslab.chess.model.Result;
  * @param <T> third input
  * @param <O> output
  */
+@FunctionalInterface
 public interface TriValidator<I, P, T, O>  {
 
     Result<O> validate(final I value, final P secondValue, final T thirdValue);

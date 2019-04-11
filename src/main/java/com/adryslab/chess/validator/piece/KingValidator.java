@@ -10,7 +10,7 @@ import com.adryslab.chess.resources.Messages;
 @Singleton
 public class KingValidator extends AbstractPieceValidator {
 
-    private static TriValidator<Cell, Cell, Cell[][], String> instance;
+    private static AbstractPieceValidator instance;
 
     // no construct allowed -> Singleton pattern
     private KingValidator() {
@@ -20,7 +20,7 @@ public class KingValidator extends AbstractPieceValidator {
      * Apply Double Checked Locking principle.
      * Singleton Pattern -> Lazy load.
      */
-    static TriValidator<Cell, Cell, Cell[][], String> getInstance() {
+    static AbstractPieceValidator getInstance() {
         if(instance == null){
             synchronized (KingValidator.class) {
                 if(instance == null){
