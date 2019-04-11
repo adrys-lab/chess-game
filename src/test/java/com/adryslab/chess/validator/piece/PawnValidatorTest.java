@@ -1,6 +1,6 @@
 package com.adryslab.chess.validator.piece;
 
-import com.adryslab.chess.controller.BoardMatrix;
+import com.adryslab.chess.controller.BoardMatrixWrapper;
 import com.adryslab.chess.model.Position;
 import com.adryslab.chess.model.cell.Cell;
 import com.adryslab.chess.model.piece.Colour;
@@ -19,7 +19,7 @@ public class PawnValidatorTest {
         final Cell destCell = Cell.of(Position.of(3, 0), new Pawn(Colour.NA));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.PAWN)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isFailure()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isFailure()));
     }
 
     @Test
@@ -28,7 +28,7 @@ public class PawnValidatorTest {
         final Cell destCell = Cell.of(Position.of(2, 0), new Pawn(Colour.NA));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.PAWN)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isFailure()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isFailure()));
     }
 
     @Test
@@ -37,7 +37,7 @@ public class PawnValidatorTest {
         final Cell destCell = Cell.of(Position.of(2, 2), new Pawn(Colour.NA));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.PAWN)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isFailure()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isFailure()));
     }
 
     @Test
@@ -45,11 +45,11 @@ public class PawnValidatorTest {
         final Cell originCell = Cell.of(Position.of(2, 2), new Pawn(Colour.BLACK));
         final Cell destCell = Cell.of(Position.of(3, 3), new Pawn(Colour.WHITE));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[3][3] = destCell;
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.PAWN)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
     }
 
     @Test
@@ -57,11 +57,11 @@ public class PawnValidatorTest {
         final Cell originCell = Cell.of(Position.of(3, 2), new Pawn(Colour.WHITE));
         final Cell destCell = Cell.of(Position.of(2, 3), new Pawn(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[2][3] = destCell;
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.PAWN)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
     }
 
     @Test
@@ -70,18 +70,18 @@ public class PawnValidatorTest {
         final Cell destCell = Cell.of(Position.of(2, 0), new Pawn(Colour.NA));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.PAWN)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
     }
 
     @Test
     public void pawnBlackFirstCanKillValid() {
         final Cell originCell = Cell.of(Position.of(4, 4), new Pawn(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[3][3] = Cell.of(Position.of(3, 3), new King(Colour.WHITE));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.PAWN)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
         board[3][3] = Cell.of(Position.of(3, 3), new EmptySlot());
     }
@@ -90,11 +90,11 @@ public class PawnValidatorTest {
     public void pawnBlackSecondCanKillValid() {
         final Cell originCell = Cell.of(Position.of(4, 4), new Pawn(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[3][5] = Cell.of(Position.of(3, 5), new King(Colour.WHITE));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.PAWN)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
         board[3][5] = Cell.of(Position.of(3, 5), new EmptySlot());
     }
@@ -103,11 +103,11 @@ public class PawnValidatorTest {
     public void pawnBlackCanNotKillforColour() {
         final Cell originCell = Cell.of(Position.of(4, 4), new Pawn(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[3][5] = Cell.of(Position.of(3, 5), new King(Colour.BLACK));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.PAWN)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isFailure()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isFailure()));
 
         board[3][5] = Cell.of(Position.of(3, 5), new EmptySlot());
     }
@@ -116,11 +116,11 @@ public class PawnValidatorTest {
     public void pawnWhiteSFirstCanKillValid() {
         final Cell originCell = Cell.of(Position.of(4, 4), new Pawn(Colour.WHITE));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[5][5] = Cell.of(Position.of(5, 5), new King(Colour.BLACK));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.PAWN)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
         board[5][5] = Cell.of(Position.of(5, 5), new EmptySlot());
     }
@@ -129,11 +129,11 @@ public class PawnValidatorTest {
     public void pawnWhiteSSecondCanKillValid() {
         final Cell originCell = Cell.of(Position.of(4, 4), new Pawn(Colour.WHITE));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[5][3] = Cell.of(Position.of(5, 3), new King(Colour.BLACK));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.PAWN)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
         board[5][3] = Cell.of(Position.of(3, 3), new EmptySlot());
     }
@@ -142,11 +142,11 @@ public class PawnValidatorTest {
     public void pawnWhiteCanNotKillforColour() {
         final Cell originCell = Cell.of(Position.of(4, 4), new Pawn(Colour.WHITE));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[3][5] = Cell.of(Position.of(5, 5), new King(Colour.WHITE));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.PAWN)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isFailure()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isFailure()));
 
         board[3][5] = Cell.of(Position.of(3, 5), new EmptySlot());
     }

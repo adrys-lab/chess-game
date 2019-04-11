@@ -21,13 +21,13 @@ import java.util.stream.Collectors;
  */
 public class BoardController {
 
-    private final BoardMatrix boardMatrix;
+    private final BoardMatrixWrapper boardMatrixWrapper;
 
     private GameState gameState = GameState.ONGOING;
 
     // Preferred way to inject dependencies via constructor, to help its testing.
-    public BoardController(final BoardMatrix boardMatrix) {
-        this.boardMatrix = boardMatrix;
+    public BoardController(final BoardMatrixWrapper boardMatrixWrapper) {
+        this.boardMatrixWrapper = boardMatrixWrapper;
     }
 
     /**
@@ -158,10 +158,10 @@ public class BoardController {
     }
 
     void drawBoard() {
-        boardMatrix.drawBoard();
+        boardMatrixWrapper.drawBoard();
     }
 
     Cell[][] getBoard() {
-        return boardMatrix.getBoardMatrix();
+        return boardMatrixWrapper.getBoardMatrix();
     }
 }

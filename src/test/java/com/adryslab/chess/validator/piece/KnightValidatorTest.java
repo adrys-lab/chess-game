@@ -1,6 +1,6 @@
 package com.adryslab.chess.validator.piece;
 
-import com.adryslab.chess.controller.BoardMatrix;
+import com.adryslab.chess.controller.BoardMatrixWrapper;
 import com.adryslab.chess.model.Position;
 import com.adryslab.chess.model.cell.Cell;
 import com.adryslab.chess.model.piece.Colour;
@@ -19,7 +19,7 @@ public class KnightValidatorTest {
         final Cell destCell = Cell.of(Position.of(2, 1), new EmptySlot());
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
     }
 
@@ -29,7 +29,7 @@ public class KnightValidatorTest {
         final Cell destCell = Cell.of(Position.of(2, 0), new EmptySlot());
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class KnightValidatorTest {
         final Cell destCell = Cell.of(Position.of(0, 0), new EmptySlot());
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class KnightValidatorTest {
         final Cell destCell = Cell.of(Position.of(0, 1), new EmptySlot());
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class KnightValidatorTest {
         final Cell destCell = Cell.of(Position.of(1, 2), new EmptySlot());
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class KnightValidatorTest {
         final Cell destCell = Cell.of(Position.of(0, 2), new EmptySlot());
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class KnightValidatorTest {
         final Cell destCell = Cell.of(Position.of(0, 0), new EmptySlot());
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class KnightValidatorTest {
         final Cell destCell = Cell.of(Position.of(1, 0), new EmptySlot());
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
     }
 
     @Test
@@ -92,18 +92,18 @@ public class KnightValidatorTest {
         final Cell destCell = Cell.of(Position.of(3, 0), new EmptySlot());
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()).isFailure()));
+                .forEach(trivalidator -> Assert.assertTrue(trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isFailure()));
     }
 
     @Test
     public void firstCorrectKill() {
         final Cell originCell = Cell.of(Position.of(0, 0), new Knight(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[2][1] = Cell.of(Position.of(2, 1), new King(Colour.WHITE));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
         board[2][1] = Cell.of(Position.of(2, 1), new EmptySlot());
     }
@@ -112,11 +112,11 @@ public class KnightValidatorTest {
     public void secondCorrectKill() {
         final Cell originCell = Cell.of(Position.of(0, 1), new Knight(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[2][0] = Cell.of(Position.of(2, 0), new King(Colour.WHITE));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
         board[2][0] = Cell.of(Position.of(2, 0), new EmptySlot());
 
@@ -126,11 +126,11 @@ public class KnightValidatorTest {
     public void thirdCorrectKill() {
         final Cell originCell = Cell.of(Position.of(2, 1), new Knight(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[0][0] = Cell.of(Position.of(0, 0), new King(Colour.WHITE));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
         board[0][0] = Cell.of(Position.of(0, 0), new EmptySlot());
     }
@@ -139,11 +139,11 @@ public class KnightValidatorTest {
     public void fourthCorrectKill() {
         final Cell originCell = Cell.of(Position.of(2, 0), new Knight(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[0][1] = Cell.of(Position.of(0, 1), new King(Colour.WHITE));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
         board[0][1] = Cell.of(Position.of(0, 1), new EmptySlot());
     }
@@ -152,11 +152,11 @@ public class KnightValidatorTest {
     public void fifthCorrectKill() {
         final Cell originCell = Cell.of(Position.of(0, 0), new Knight(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[1][2] = Cell.of(Position.of(1, 2), new King(Colour.WHITE));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
         board[1][2] = Cell.of(Position.of(1, 2), new EmptySlot());
     }
@@ -165,11 +165,11 @@ public class KnightValidatorTest {
     public void sixthCorrectKill() {
         final Cell originCell = Cell.of(Position.of(1, 0), new Knight(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[0][2] = Cell.of(Position.of(0, 2), new King(Colour.WHITE));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
         board[0][2] = Cell.of(Position.of(0, 2), new EmptySlot());
     }
@@ -178,11 +178,11 @@ public class KnightValidatorTest {
     public void seventhCorrectKill() {
         final Cell originCell = Cell.of(Position.of(1, 2), new Knight(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[0][0] = Cell.of(Position.of(0, 0), new King(Colour.WHITE));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
         board[0][0] = Cell.of(Position.of(0, 0), new EmptySlot());
     }
@@ -191,11 +191,11 @@ public class KnightValidatorTest {
     public void eigthCorrectKill() {
         final Cell originCell = Cell.of(Position.of(0, 2), new Knight(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[1][0] = Cell.of(Position.of(1, 0), new King(Colour.WHITE));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isValid()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isValid()));
 
         board[1][0] = Cell.of(Position.of(1, 0), new EmptySlot());
     }
@@ -204,11 +204,11 @@ public class KnightValidatorTest {
     public void incorrectKillForColour() {
         final Cell originCell = Cell.of(Position.of(0, 2), new Knight(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[1][0] = Cell.of(Position.of(1, 0), new King(Colour.BLACK));
 
         PieceValidatorProvider.getPieceMoveValidators(PieceType.KNIGHT)
-                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrix.getInstance().getBoardMatrix()).isFailure()));
+                .forEach(validator -> Assert.assertTrue(validator.validate(originCell, BoardMatrixWrapper.getInstance().getBoardMatrix()).isFailure()));
 
         board[1][0] = Cell.of(Position.of(1, 0), new EmptySlot());
     }

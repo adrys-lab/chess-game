@@ -15,14 +15,14 @@ import org.junit.Test;
 
 public class BoardControllerTest {
 
-    private final BoardController boardController = new BoardController(BoardMatrix.getInstance());
+    private final BoardController boardController = new BoardController(BoardMatrixWrapper.getInstance());
 
     @Test
     public void assertCanNotMoveToSamePieceColourCell() {
         final Cell originCell = Cell.of(Position.of(3, 3), new Bishop(Colour.BLACK));
         final Cell destCell = Cell.of(Position.of(5, 5), new Bishop(Colour.BLACK));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[4][5] = Cell.of(Position.of(4, 5), new King(Colour.WHITE));
 
         Result<String> result = boardController.move(originCell, destCell);
@@ -38,7 +38,7 @@ public class BoardControllerTest {
         final Cell originCell = Cell.of(Position.of(3, 3), new Bishop(Colour.BLACK));
         final Cell destCell = Cell.of(Position.of(4, 4), new EmptySlot());
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[3][3] = originCell;
         board[4][4] = destCell;
         board[3][5] = Cell.of(Position.of(3, 5), new King(Colour.WHITE));
@@ -57,7 +57,7 @@ public class BoardControllerTest {
         final Cell originCell = Cell.of(Position.of(3, 3), new Bishop(Colour.BLACK));
         final Cell destCell = Cell.of(Position.of(4, 4), new King(Colour.WHITE));
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[3][3] = originCell;
         board[4][4] = destCell;
 

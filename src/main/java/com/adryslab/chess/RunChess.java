@@ -1,7 +1,7 @@
 package com.adryslab.chess;
 
 import com.adryslab.chess.controller.BoardController;
-import com.adryslab.chess.controller.BoardMatrix;
+import com.adryslab.chess.controller.BoardMatrixWrapper;
 import com.adryslab.chess.controller.GameController;
 import com.adryslab.chess.controller.PlayerController;
 import com.adryslab.chess.model.Player;
@@ -31,7 +31,7 @@ public class RunChess {
         final String PlayerTwoName = scanner.nextLine();
 
         final PlayerController playerController = new PlayerController(new Player(playerOneName, Colour.WHITE, true), new Player(PlayerTwoName, Colour.BLACK, false));
-        final BoardController boardController = new BoardController(BoardMatrix.getInstance());
+        final BoardController boardController = new BoardController(BoardMatrixWrapper.getInstance());
         final GameController gameController = new GameController(playerController, boardController);
 
         System.out.println(Messages.LETS_START);

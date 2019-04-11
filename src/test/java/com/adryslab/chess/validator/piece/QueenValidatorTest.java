@@ -1,6 +1,6 @@
 package com.adryslab.chess.validator.piece;
 
-import com.adryslab.chess.controller.BoardMatrix;
+import com.adryslab.chess.controller.BoardMatrixWrapper;
 import com.adryslab.chess.model.Position;
 import com.adryslab.chess.model.Result;
 import com.adryslab.chess.model.cell.Cell;
@@ -18,12 +18,12 @@ public class QueenValidatorTest {
         final Cell originCell = Cell.of(Position.of(2, 4), new Queen(Colour.BLACK));
         final Cell destCell = Cell.of(Position.of(5, 4), new EmptySlot());
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[5][4] = destCell;
 
         Assert.assertTrue(PieceValidatorProvider.getPieceMoveValidators(PieceType.QUEEN)
                 .stream()
-                .map(trivalidator -> trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()))
+                .map(trivalidator -> trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()))
                 .filter(Result::isValid)
                 .findAny()
                 .orElseGet(Result::failure).isValid());
@@ -36,12 +36,12 @@ public class QueenValidatorTest {
         final Cell originCell = Cell.of(Position.of(5, 4), new Queen(Colour.BLACK));
         final Cell destCell = Cell.of(Position.of(2, 4), new EmptySlot());
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[2][4] = destCell;
 
         Assert.assertTrue(PieceValidatorProvider.getPieceMoveValidators(PieceType.QUEEN)
                 .stream()
-                .map(trivalidator -> trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()))
+                .map(trivalidator -> trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()))
                 .filter(Result::isValid)
                 .findAny()
                 .orElseGet(Result::failure).isValid());
@@ -54,12 +54,12 @@ public class QueenValidatorTest {
         final Cell originCell = Cell.of(Position.of(5, 2), new Queen(Colour.BLACK));
         final Cell destCell = Cell.of(Position.of(5, 5), new EmptySlot());
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[5][5] = destCell;
 
         Assert.assertTrue(PieceValidatorProvider.getPieceMoveValidators(PieceType.QUEEN)
                 .stream()
-                .map(trivalidator -> trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()))
+                .map(trivalidator -> trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()))
                 .filter(Result::isValid)
                 .findAny()
                 .orElseGet(Result::failure).isValid());
@@ -72,12 +72,12 @@ public class QueenValidatorTest {
         final Cell originCell = Cell.of(Position.of(5, 5), new Queen(Colour.BLACK));
         final Cell destCell = Cell.of(Position.of(5, 2), new EmptySlot());
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[5][2] = destCell;
 
         Assert.assertTrue(PieceValidatorProvider.getPieceMoveValidators(PieceType.QUEEN)
                 .stream()
-                .map(trivalidator -> trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()))
+                .map(trivalidator -> trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()))
                 .filter(Result::isValid)
                 .findAny()
                 .orElseGet(Result::failure).isValid());
@@ -90,12 +90,12 @@ public class QueenValidatorTest {
         final Cell originCell = Cell.of(Position.of(5, 5), new Queen(Colour.BLACK));
         final Cell destCell = Cell.of(Position.of(3, 3), new EmptySlot());
 
-        Cell[][] board = BoardMatrix.getInstance().getBoardMatrix();
+        Cell[][] board = BoardMatrixWrapper.getInstance().getBoardMatrix();
         board[3][3] = destCell;
 
         Assert.assertTrue(PieceValidatorProvider.getPieceMoveValidators(PieceType.QUEEN)
                 .stream()
-                .map(trivalidator -> trivalidator.validate(originCell, destCell, BoardMatrix.getInstance().getBoardMatrix()))
+                .map(trivalidator -> trivalidator.validate(originCell, destCell, BoardMatrixWrapper.getInstance().getBoardMatrix()))
                 .filter(Result::isValid)
                 .findAny()
                 .orElseGet(Result::failure)
