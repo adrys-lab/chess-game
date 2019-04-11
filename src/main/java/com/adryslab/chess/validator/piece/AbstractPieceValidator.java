@@ -6,6 +6,7 @@ import com.adryslab.chess.model.cell.Cell;
 import com.adryslab.chess.model.piece.Colour;
 import com.adryslab.chess.model.piece.type.PieceType;
 import com.adryslab.chess.resources.ErrorMessages;
+import com.adryslab.chess.validator.composed.BiValidator;
 
 import java.util.function.Function;
 
@@ -15,7 +16,7 @@ import java.util.function.Function;
  *
  * Validations can be related to piece correctness movement, and validation to king Check all around the board.
  */
-abstract class AbstractPieceValidator implements TriValidator<Cell, Cell, Cell[][], String> {
+abstract class AbstractPieceValidator implements TriValidator<Cell, Cell, Cell[][], String>, BiValidator<Cell, Cell[][], String> {
 
     Result<String> commonValidate(final Cell originCell, final Cell destinationCell) {
 
